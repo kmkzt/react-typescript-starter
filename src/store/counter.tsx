@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { createProvider } from 'react-redux'
 
 interface State {
   count: number
