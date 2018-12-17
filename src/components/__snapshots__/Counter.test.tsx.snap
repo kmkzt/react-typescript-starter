@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter コンポーネント render 1`] = `
+<Component
+  count={0}
+>
+  <div>
+    <h3>
+      COUNTER
+    </h3>
+    <div>
+      0
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      +1
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      -1
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Reset
+    </button>
+  </div>
+</Component>
+`;

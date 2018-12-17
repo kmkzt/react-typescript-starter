@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CounterProvider snapshot 1`] = `
+<Component>
+  <Component>
+    <Component
+      count={0}
+      decrement={[Function]}
+      increment={[Function]}
+      reset={[Function]}
+    >
+      <div>
+        <h3>
+          COUNTER
+        </h3>
+        <div>
+          0
+        </div>
+        <button
+          onClick={[Function]}
+        >
+          +1
+        </button>
+        <button
+          onClick={[Function]}
+        >
+          -1
+        </button>
+        <button
+          onClick={[Function]}
+        >
+          Reset
+        </button>
+      </div>
+    </Component>
+  </Component>
+</Component>
+`;
