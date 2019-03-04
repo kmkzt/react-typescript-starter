@@ -80,7 +80,7 @@ const common = {
       safe: false
     }),
     new FaviconsWebpackPlugin({
-      logo: './src/assets/svg/logo/logo.svg',
+      // logo: './src/assets/svg/logo/logo.svg',
       prefix: 'icons-[hash]/',
       // Emit all stats of the generated icons
       emitStats: false,
