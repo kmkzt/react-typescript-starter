@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { counterStore } from '@/store'
 export interface Props {
   count: number
@@ -13,9 +13,9 @@ export const Component: React.SFC<Props> = ({
   decrement,
   reset
 }) => {
-  const hancleClick = (action: () => void) => (
+  const hancleClick = (action?: () => void) => (
     e: React.MouseEvent<HTMLButtonElement>
-  ) => action()
+  ) => (action ? action() : null)
   return (
     <div>
       <h3>COUNTER</h3>

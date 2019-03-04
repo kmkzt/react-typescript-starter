@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React, { Reducer, Dispatch } from 'react'
 
 interface State {
   count: number
 }
 interface Action {
   type: ActionTypes
-  param: any
+  payload?: any
 }
 enum ActionTypes {
   INCREMENT = 'increment',
@@ -22,14 +22,17 @@ const initialState: State = {
   count: 0
 }
 
-const CounterContext = React.createContext({
+const CounterContext = React.createContext<{
+  state: State
+  dispatch: Dispatch<Action> | null
+}>({
   state: initialState,
-  dispatch: undefined
+  dispatch: null
 })
 
 const reducer = (
   state: State = initialState,
-  { type, param }: Action
+  { type, payload }: Action
 ): State => {
   switch (type) {
     case ActionTypes.INCREMENT:
@@ -53,7 +56,10 @@ const reducer = (
 }
 
 export const CounterProvider: React.SFC<{}> = ({ children }) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState)
+  const [state, dispatch] = React.useReducer<Reducer<State, Action>>(
+    reducer,
+    initialState
+  )
   const { Provider } = CounterContext
   return (
     <Provider
@@ -70,14 +76,17 @@ export const CounterProvider: React.SFC<{}> = ({ children }) => {
 export const counterStore = (): Store => {
   const { state, dispatch } = React.useContext(CounterContext)
   const increment = () =>
+    dispatch &&
     dispatch({
       type: ActionTypes.INCREMENT
     })
   const decrement = () =>
+    dispatch &&
     dispatch({
       type: ActionTypes.DECREMENT
     })
   const reset = () =>
+    dispatch &&
     dispatch({
       type: ActionTypes.RESET
     })

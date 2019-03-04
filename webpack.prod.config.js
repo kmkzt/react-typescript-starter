@@ -1,4 +1,3 @@
-
 const { GenerateSW } = require('workbox-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 // https://github.com/terser-js/terser#minify-options
@@ -46,27 +45,9 @@ module.exports = {
       name: true,
       cacheGroups: {
         reactmodules: {
-          test: /[\\/]node_modules[\\/]react|styled|polished/,
+          test: /[\\/]node_modules[\\/]react|styled/,
           name: 'reactmodule',
           priority: -10,
-          chunks: 'all'
-        },
-        apollomodules: {
-          test: /[\\/]node_modules[\\/]apollo|graphql/,
-          name: 'apollomodules',
-          priority: -11,
-          chunks: 'all'
-        },
-        amplify: {
-          test: /[\\/]node_modules[\\/]aws-amplify/,
-          name: 'amplify',
-          priority: -14,
-          chunks: 'all'
-        },
-        appsync: {
-          test: /[\\/]node_modules[\\/]aws-appsync/,
-          name: 'awsmodule',
-          priority: -15,
           chunks: 'all'
         },
         vendors: {

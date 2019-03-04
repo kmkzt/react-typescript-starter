@@ -12,7 +12,10 @@ const config = devMode
 
 const common = {
   mode: devMode ? 'development' : 'production',
-  entry: [...Object.keys(dependencies), './src/index.tsx'],
+  entry: [
+    ...Object.keys(dependencies).filter(pa => /react|styled/.test(pa)),
+    './src/index.tsx'
+  ],
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',

@@ -13,8 +13,8 @@
     "lint:fix": "prettier --write ./src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "polished": "3.0.3",
     "react": "16.8.3",
-    "react-apollo": "2.5.1",
     "react-dom": "16.8.3",
     "react-helmet": "6.0.0-beta",
     "react-router-dom": "4.4.0-beta.7",
@@ -72,9 +72,9 @@
     "svgo-loader": "2.2.0",
     "ts-jest": "23.10.4",
     "ts-loader": "5.3.1",
+    "tsconfig-paths-webpack-plugin": "3.2.0",
     "typescript": "3.3.3333",
     "typescript-styled-plugin": "0.14.0",
-    "tsconfig-paths-webpack-plugin": "3.2.0",
     "uglifyjs-webpack-plugin": "2.0.1",
     "webpack": "4.29.6",
     "webpack-cli": "3.2.3",
@@ -82,6 +82,5 @@
     "webpack-manifest-plugin": "2.0.4",
     "webpack-merge": "4.2.1",
     "workbox-webpack-plugin": "4.0.0"
-
   }
 }
