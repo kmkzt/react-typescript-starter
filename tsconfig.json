@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "build/dist",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "outDir": "./dist",
     "target": "es5",
+    "module": "esnext",
+    "lib": ["es2018", "es2017", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -12,22 +12,23 @@
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "noEmit": true,
+    "noUnusedLocals": false,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
     "plugins": [
       {
         "name": "typescript-styled-plugin"
       }
     ],
     "paths": {
-      "@*": ["src*"],
+      "@*": ["src*"]
     },
-    "typeRoots": [
-      "src/typings",
-      "node_modules/@types"
-    ]
+    "typeRoots": ["node_modules/@types", "./types"]
   },
-  "include": [
-    "./src/**/*"
-  ],
   "exclude": [
     "node_modules",
     "build",

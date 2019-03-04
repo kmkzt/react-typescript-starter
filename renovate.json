@@ -1,0 +1,40 @@
+{
+  "extends": ["config:base"],
+  "timezone": "Asia/Tokyo",
+  "labels": ["renovate"],
+  "patch": { "automerge": true },
+  "minor": {
+    "automerge": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on the first day of the month"]
+  },
+  "ignoreDeps": ["^@types/node"],
+  "packageRules": [
+    {
+      "groupName": "React package",
+      "packagePatterns": ["^react", "^@types/react"]
+    },
+    {
+      "groupName": "Unit test package",
+      "packagePatterns": ["^jest", "^enzyme", "^@types/jest", "^@types/jest"]
+    },
+    {
+      "groupName": "typescript library",
+      "packagePatterns": ["^tslint-", "^tsconfig", "^ts-"]
+    },
+    {
+      "groupName": "apollo package",
+      "packagePatterns": ["^apollo", "^@types/apollo"]
+    },
+    {
+      "groupName": "aws library",
+      "packagePatterns": ["^aws-", "^@types/amplify"]
+    },
+    {
+      "groupName": "webpack library",
+      "packagePatterns": ["^webpack"]
+    }
+  ]
+}

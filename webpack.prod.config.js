@@ -1,39 +1,86 @@
-const { join, resolve } = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const Dotenv = require('dotenv-webpack')
 
-const config = {
-  entry: resolve('src', 'library.tsx'),
+const { GenerateSW } = require('workbox-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+// https://github.com/terser-js/terser#minify-options
+
+module.exports = {
   devtool: false,
-
-  output: {
-    filename: 'index.min.js',
-    path: resolve('lib'),
-    library: "samplelibrary-reactts",
-    libraryTarget: "umd"
-  },
-
-  // 依存ライブラリの設定(使用先で必要なライブラリ)
-  externals: {
-    'react': 'react',
-    'styled-components': 'styled-components',
-    'react-redux': 'react-redux',
-    'react-router-dom': 'react-router-dom',
-    'react-css-modules': 'react-css-modules'
-  },
-  plugins: [
-    new Dotenv({
-      path: 'production.env',
-      safe: false
-    })
-  ],
+  plugins: [new GenerateSW()],
   optimization: {
+    namedModules: true,
+    namedChunks: true,
     minimizer: [
-      new UglifyJsPlugin({
-        parallel: true
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        extractComments: 'all',
+        terserOptions: {
+          compress: {
+            arrows: true,
+            drop_console: true,
+            booleans: true
+          },
+          sourceMap: true,
+          ecma: 5, // specify one of: 5, 6, 7 or 8
+          keep_classnames: false,
+          keep_fnames: false,
+          module: true,
+          output: null,
+          ie8: false,
+          nameCache: null, // or specify a name cache object
+          safari10: false,
+          toplevel: true,
+          warnings: false
+        }
       })
-    ]
+    ],
+    minimize: true,
+    splitChunks: {
+      chunks: 'async',
+      minSize: 1000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        reactmodules: {
+          test: /[\\/]node_modules[\\/]react|styled|polished/,
+          name: 'reactmodule',
+          priority: -10,
+          chunks: 'all'
+        },
+        apollomodules: {
+          test: /[\\/]node_modules[\\/]apollo|graphql/,
+          name: 'apollomodules',
+          priority: -11,
+          chunks: 'all'
+        },
+        amplify: {
+          test: /[\\/]node_modules[\\/]aws-amplify/,
+          name: 'amplify',
+          priority: -14,
+          chunks: 'all'
+        },
+        appsync: {
+          test: /[\\/]node_modules[\\/]aws-appsync/,
+          name: 'awsmodule',
+          priority: -15,
+          chunks: 'all'
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          priority: -16,
+          chunks: 'all'
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
   }
-};
-
-module.exports = config
+}

@@ -1,31 +1,14 @@
-const { join, resolve } = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
+const webpack = require('webpack')
 
-const config = {
-  entry: resolve('src', 'index.tsx'),
+module.exports = {
   devtool: 'source-map',
-
-  output: {
-    filename: '[name].bundle.js',
-    path: resolve('public')
-  },
-
-  plugins: [
-    new Dotenv({
-      path: 'production.env',
-      safe: false
-    }),
-    new HtmlWebpackPlugin({
-      template: resolve('template.html'),
-    })
-  ],
-
   devServer: {
-    contentBase: join(__dirname, 'public'),
+    contentBase: './dist',
     compress: true,
-    port: 9000
+    port: 9000,
+    overlay: true,
+    hot: true,
+    historyApiFallback: true
   },
-};
-
-module.exports = config
+  plugins: [new webpack.HotModuleReplacementPlugin()]
+}
