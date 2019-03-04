@@ -80,7 +80,7 @@ const common = {
       safe: false
     }),
     new FaviconsWebpackPlugin({
-      // logo: './src/assets/svg/logo/logo.svg',
+      logo: './logo.svg',
       prefix: 'icons-[hash]/',
       // Emit all stats of the generated icons
       emitStats: false,
@@ -118,7 +118,7 @@ const common = {
         href: '/'
       },
       title: 'atSea',
-      template: 'index.html',
+      template: 'template.html',
       hash: true,
       minify: true,
       cache: !devMode
