@@ -45,7 +45,7 @@
     "babel-plugin-graphql-tag": "2.0.0",
     "babel-plugin-styled-components": "1.10.0",
     "copy-webpack-plugin": "5.0.0",
-    "css-loader": "1.0.0",
+    "css-loader": "1.0.1",
     "dotenv-webpack": "1.7.0",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.10.0",
