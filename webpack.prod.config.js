@@ -1,8 +1,11 @@
+const { smart } = require('webpack-merge')
 const { GenerateSW } = require('workbox-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-// https://github.com/terser-js/terser#minify-options
+const TerserPlugin = require('terser-webpack-plugin') // https://github.com/terser-js/terser#minify-options
+const common = require('./webpack.config')
 
-module.exports = {
+const excludeVendorModule = []
+
+module.exports = smart(common, {
   devtool: false,
   plugins: [new GenerateSW()],
   optimization: {
@@ -51,7 +54,17 @@ module.exports = {
           chunks: 'all'
         },
         vendors: {
-          test: /[\\/]node_modules[\\/]/,
+          test(mod, chunk) {
+            if (!/[\\/]node_modules[\\/]/.test(mod.resource)) {
+              return false
+            }
+            return (
+              excludeVendorModule.length === 0 ||
+              excludeVendorModule.some(
+                libname => mod.resource && mod.resource.includes(libname)
+              )
+            )
+          },
           name: 'vendors',
           priority: -16,
           chunks: 'all'
@@ -64,4 +77,4 @@ module.exports = {
       }
     }
   }
-}
+})

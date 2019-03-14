@@ -1,16 +1,12 @@
 const { resolve } = require('path')
-const { smart } = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const dependencies = require('./package.json').dependencies
 const devMode = process.env.NODE_ENV === 'development'
-const config = devMode
-  ? require('./webpack.dev.config')
-  : require('./webpack.prod.config')
 
-const common = {
+module.exports = {
   mode: devMode ? 'development' : 'production',
   entry: [
     ...Object.keys(dependencies).filter(pa => /react|styled/.test(pa)),
@@ -19,7 +15,7 @@ const common = {
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
-    path: resolve(__dirname, 'dist')
+    path: resolve(__dirname, 'build')
   },
   module: {
     rules: [
@@ -128,5 +124,3 @@ const common = {
     })
   ]
 }
-
-module.exports = smart(common, config)

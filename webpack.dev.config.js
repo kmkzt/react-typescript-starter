@@ -1,14 +1,16 @@
-const webpack = require('webpack')
+const { HotModuleReplacementPlugin } = require('webpack')
+const { smart } = require('webpack-merge')
+const common = require('./webpack.config')
 
-module.exports = {
+module.exports = smart(common, {
   devtool: 'source-map',
   devServer: {
-    contentBase: './dist',
+    contentBase: './build',
     compress: true,
     port: 9000,
     overlay: true,
     hot: true,
     historyApiFallback: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
-}
+  plugins: [new HotModuleReplacementPlugin()]
+})
