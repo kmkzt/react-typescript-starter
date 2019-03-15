@@ -1,17 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Counter } from '@/components/Counter'
-import { CounterProvider } from '@/store'
+import { App } from '@/app'
 
-export const App = () => {
-  return (
-    <CounterProvider>
-      <div>
-        <Counter />
-        <Counter />
-      </div>
-    </CounterProvider>
-  )
+if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+  })
 }
 
-ReactDOM.render(<App />, document.getElementById('root') as HTMLElement)
+const app: HTMLElement = document.createElement('div')
+document.body.appendChild(app)
+ReactDOM.render(<App />, app)

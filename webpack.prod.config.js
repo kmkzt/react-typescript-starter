@@ -7,7 +7,11 @@ const excludeVendorModule = []
 
 module.exports = smart(common, {
   devtool: false,
-  plugins: [new GenerateSW()],
+  plugins: [
+    new GenerateSW({
+      swDest: 'sw.js'
+    })
+  ],
   optimization: {
     namedModules: true,
     namedChunks: true,
