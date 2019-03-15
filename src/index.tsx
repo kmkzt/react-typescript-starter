@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from '@/app'
+import loadingWorkbox from './workbox'
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-  })
+  window.addEventListener('load', loadingWorkbox)
 }
 
-const app: HTMLElement = document.createElement('div')
-document.body.appendChild(app)
-ReactDOM.render(<App />, app)
+const app: HTMLElement | null = document.getElementById('app')
+if (app) {
+  ReactDOM.render(<App />, app)
+}
