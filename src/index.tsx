@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from '@/app'
-import serviceWorkerRegister from './workbox'
+import serviceWorkerRegister from './registerSW'
 
 if (process.env.NODE_ENV === 'production') {
   serviceWorkerRegister()
