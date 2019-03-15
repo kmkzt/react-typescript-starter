@@ -4,8 +4,8 @@ import 'jest-styled-components'
 import toJson from 'enzyme-to-json'
 import { Component as Counter } from './Counter'
 
-describe('Counter コンポーネント', () => {
-  it('render', () => {
+describe('Counter Component', () => {
+  it('snapshot', () => {
     const tree = mount(<Counter count={0} />)
     expect(toJson(tree)).toMatchSnapshot()
   })
