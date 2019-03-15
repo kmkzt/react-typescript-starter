@@ -1,5 +1,6 @@
+const { resolve } = require('path')
 const { smart } = require('webpack-merge')
-const { GenerateSW } = require('workbox-webpack-plugin')
+const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin') // https://github.com/terser-js/terser#minify-options
 const common = require('./webpack.config')
 
@@ -10,9 +11,17 @@ module.exports = smart(common, {
   plugins: [
     new GenerateSW({
       swDest: 'sw.js',
-      include: [/\.html$/, /\.js$/],
+      globDirectory: resolve(__dirname, 'dist'),
+      globPatterns: ['**/*.{html,js,css}'],
+      // globPatterns: ['**/*.{html,js,css}', '**/*.{jpg,jpeg,png,gif,webp,svg}'],
       clientsClaim: true,
       skipWaiting: true
+      // runtimeCaching: [
+      //   {
+      //     urlPattern: new RegExp('https://apiendpoint.com'),
+      //     handler: 'StaleWhileRevalidate'
+      //   }
+      // ]
     })
   ],
   optimization: {

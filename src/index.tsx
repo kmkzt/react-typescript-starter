@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from '@/app'
-import loadingWorkbox from './workbox'
+import serviceWorkerRegister from './workbox'
 
-if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', loadingWorkbox)
+if (process.env.NODE_ENV === 'production') {
+  serviceWorkerRegister()
 }
 
 const app: HTMLElement | null = document.getElementById('app')
