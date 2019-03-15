@@ -9,7 +9,10 @@ module.exports = smart(common, {
   devtool: false,
   plugins: [
     new GenerateSW({
-      swDest: 'sw.js'
+      swDest: 'sw.js',
+      include: [/\.html$/, /\.js$/],
+      clientsClaim: true,
+      skipWaiting: true
     })
   ],
   optimization: {
