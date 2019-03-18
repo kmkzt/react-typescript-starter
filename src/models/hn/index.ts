@@ -30,6 +30,7 @@ export type User = {
   submitted?: number[]
 }
 
+export type Stories = number[]
 export type StoryKind = 'top' | 'new' | 'best' | 'ask' | 'show' | 'job'
 
 export type Update = {

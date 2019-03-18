@@ -6,7 +6,7 @@ export async function request<T extends object>(
 ): Promise<T> {
   try {
     const res: Response = await fetch(url, option)
-    return await res.json()
+    return (await res.json()) as T
   } catch (err) {
     throw err
   }
