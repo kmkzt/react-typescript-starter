@@ -1,14 +1,11 @@
 import React from 'react'
-import { Counter } from '@/components/Counter'
-import { CounterProvider } from '@/store'
+import { HNProvider } from './store/hn'
+import { Page } from './pages'
 
 export const App = () => {
   return (
-    <CounterProvider>
-      <div>
-        <Counter />
-        <Counter />
-      </div>
-    </CounterProvider>
+    <HNProvider>
+      <Page />
+    </HNProvider>
   )
 }
