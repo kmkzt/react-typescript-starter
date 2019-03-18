@@ -12,16 +12,50 @@ module.exports = smart(common, {
     new GenerateSW({
       swDest: 'sw.js',
       globDirectory: resolve(__dirname, 'dist'),
-      globPatterns: ['**/*.{html,js,css}'],
-      // globPatterns: ['**/*.{html,js,css}', '**/*.{jpg,jpeg,png,gif,webp,svg}'],
+      globPatterns: ['**/*.{html,js,css}', '**/*.{jpg,jpeg,png,gif,webp,svg}'],
+      globIgnores: ['**/node_modules/**/*'],
       clientsClaim: true,
-      skipWaiting: true
-      // runtimeCaching: [
-      //   {
-      //     urlPattern: new RegExp('https://apiendpoint.com'),
-      //     handler: 'StaleWhileRevalidate'
-      //   }
-      // ]
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: /\.html/,
+          handler: 'networkFirst',
+          options: {
+            cacheName: 'html',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 10
+            }
+          }
+        },
+        {
+          urlPattern: /\.js/,
+          handler: 'networkFirst',
+          options: {
+            cacheName: 'js',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 2
+            }
+          }
+        },
+        {
+          urlPattern: /\.(png|svg|woff|ttf|eot)/,
+          handler: 'cacheFirst',
+          options: {
+            cacheName: 'image',
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 60 * 60 * 24 * 7
+            }
+          }
+        }
+        // Api request cache
+        // {
+        //   urlPattern: new RegExp('https://apiendpoint.com'),
+        //   handler: 'StaleWhileRevalidate'
+        // }
+      ]
     })
   ],
   optimization: {
