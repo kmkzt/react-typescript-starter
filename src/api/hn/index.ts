@@ -6,10 +6,10 @@ const version = 'v0'
 
 const host = `${domain}/${version}`
 
-export const fetchItem = ({ id }: { id: Pick<Item, 'id'> }): Promise<Item> =>
+export const fetchItem = ({ id }: { id: number }): Promise<Item> =>
   request<Item>(`${host}/item/${id}.json`)
 
-export const fetchUser = ({ id }: { id: Pick<User, 'id'> }): Promise<User> =>
+export const fetchUser = ({ id }: { id: string }): Promise<User> =>
   request<User>(`${host}/user/${id}.json`)
 
 export const fetchStories = ({ kind }: { kind: StoryKind }): Promise<Stories> =>

@@ -5,7 +5,7 @@ import { Page } from './pages'
 export const App = () => {
   return (
     <HNProvider>
-      <Page />
+      <Page kind={'top'} />
     </HNProvider>
   )
 }

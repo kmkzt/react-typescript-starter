@@ -60,7 +60,7 @@ export const Provider: React.SFC<{}> = ({ children }) => {
 
 export interface Store {
   users: State
-  getUser: (id: Pick<User, 'id'>) => Promise<void>
+  getUser: (id: string) => Promise<void>
   clearUser: () => void
 }
 

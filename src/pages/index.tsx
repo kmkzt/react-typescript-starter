@@ -1,11 +1,22 @@
 import React, { FC, useEffect } from 'react'
 import { connectStories } from '@/store/hn/stories'
+import { StoryKind } from '@/models/hn'
+import { HnItems } from '@/components/orgenisms/HnItems'
 
-export const Page: FC<{}> = () => {
+interface Props {
+  kind: StoryKind
+}
+export const Page: FC<Props> = ({ kind }) => {
   const { stories, getStory } = connectStories()
   useEffect(() => {
-    getStory('top')
+    getStory(kind)
   }, [])
-
-  return <>{JSON.stringify(stories)}</>
+  if (!stories || !stories.hasOwnProperty(kind)) return <p>...loading</p>
+  return (
+    <div>
+      {stories[kind].map((id: number) => (
+        <HnItems id={id} />
+      ))}
+    </div>
+  )
 }
