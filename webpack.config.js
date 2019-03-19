@@ -118,7 +118,7 @@ module.exports = {
       base: {
         href: '/'
       },
-      title: 'atSea',
+      title: 'react-hooks-hackernews',
       template: 'template.html',
       hash: true,
       minify: true,
