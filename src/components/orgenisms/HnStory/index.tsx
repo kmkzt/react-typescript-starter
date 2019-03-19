@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState, useCallback } from 'react'
 import { connectStories } from '@/store/hn/stories'
 import { StoryKind } from '@/models/hn'
 import { HnItems } from '@/components/orgenisms/HnItems'
@@ -6,15 +6,46 @@ import { HnItems } from '@/components/orgenisms/HnItems'
 interface Props {
   kind: StoryKind
 }
+
+function pageMaxNumber(items: any[], num: number): number {
+  return Math.ceil(items.length / num)
+}
+function pageItem<T>(items: T[], page: number): T[] {
+  return items.slice(page * 10, page * 10 + 10)
+}
 export const HnStory: FC<Props> = ({ kind }) => {
   const { stories, getStory } = connectStories()
+  const [page, setPage] = useState<number>(0)
+  const changePage = useCallback(
+    (p: number) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      setPage(p)
+    },
+    [page]
+  )
   useEffect(() => {
     getStory(kind)
-  }, [])
+    setPage(0)
+  }, [kind])
+
   if (!stories || !stories.hasOwnProperty(kind)) return <p>...loading</p>
+
   return (
     <div>
-      {stories[kind].map((id: number) => (
+      {Array.from({ length: pageMaxNumber(stories[kind], 10) }).map(
+        (n: any, i: number) => (
+          <a
+            style={{
+              display: 'inline-block',
+              padding: '.3rem',
+              background: page === i ? '#03a' : '#ddd'
+            }}
+            onClick={changePage(i)}
+          >
+            {i}
+          </a>
+        )
+      )}
+      {pageItem<number>(stories[kind], page).map((id: number) => (
         <HnItems key={id} id={id} />
       ))}
     </div>
