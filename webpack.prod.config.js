@@ -11,7 +11,7 @@ module.exports = smart(common, {
   plugins: [
     new GenerateSW({
       swDest: 'sw.js',
-      globDirectory: resolve(__dirname, 'dist'),
+      globDirectory: resolve(__dirname, 'build'),
       globPatterns: ['**/*.{html,js,css}', '**/*.{jpg,jpeg,png,gif,webp,svg}'],
       globIgnores: ['**/node_modules/**/*'],
       clientsClaim: true,

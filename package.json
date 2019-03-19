@@ -6,7 +6,7 @@
   "main": "lib/index.min.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --config webpack.dev.config.js",
-    "build": "rimraf build && NODE_ENV=production webpack -p --config webpack.prod.config.js",
+    "build": "rimraf ./build/* && NODE_ENV=production webpack -p --config webpack.prod.config.js",
     "build:dev": "NODE_ENV=production webpack-dev-server --config webpack.prod.config.js",
     "build:check": "NODE_ENV=production webpack -p --config webpack.check.config.js",
     "test": "jest",
