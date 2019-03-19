@@ -49,12 +49,15 @@ module.exports = smart(common, {
               maxAgeSeconds: 60 * 60 * 24 * 7
             }
           }
+        },
+        {
+          urlPattern: new RegExp('https://hacker-news.firebaseio.com/v0/'),
+          handler: 'cacheFirst',
+          expiration: {
+            maxEntries: 100,
+            maxAgeSeconds: 60 * 3
+          }
         }
-        // Api request cache
-        // {
-        //   urlPattern: new RegExp('https://apiendpoint.com'),
-        //   handler: 'StaleWhileRevalidate'
-        // }
       ]
     })
   ],
