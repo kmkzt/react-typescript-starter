@@ -34,6 +34,7 @@ export const HnStory: FC<Props> = ({ kind }) => {
       {Array.from({ length: pageMaxNumber(stories[kind], 10) }).map(
         (n: any, i: number) => (
           <a
+            key={i}
             style={{
               display: 'inline-block',
               padding: '.3rem',
