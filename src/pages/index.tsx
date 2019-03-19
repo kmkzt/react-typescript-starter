@@ -1,15 +1,16 @@
 import React, { FC, useEffect } from 'react'
-import { connectStories } from '@/store/hn/stories'
-import { StoryKind } from '@/models/hn'
 import { HnStory } from '@/components/orgenisms/HnStory'
 import { withRouter, Switch, Route, Link } from 'react-router-dom'
+import { Reset } from '@/components/utils/reset'
 
 export default withRouter(({}) => (
   <>
+    <Reset />
     <header>
       <nav>
         {['top', 'new', 'best', 'ask', 'show', 'job'].map((ki: string) => (
           <Link
+            key={ki}
             style={{
               display: 'inline-block',
               background: '#eee',
