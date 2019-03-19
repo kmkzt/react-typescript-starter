@@ -3,22 +3,22 @@ import { HnStory } from '@/components/orgenisms/HnStory'
 import { withRouter, Switch, Route, Link } from 'react-router-dom'
 import { Reset } from '@/components/utils/reset'
 
+const NavStyle = {
+  display: 'inline-block',
+  background: '#eee',
+  marginRight: '.5rem',
+  padding: '.3rem'
+}
 export default withRouter(({}) => (
   <>
     <Reset />
     <header>
       <nav>
-        {['top', 'new', 'best', 'ask', 'show', 'job'].map((ki: string) => (
-          <Link
-            key={ki}
-            style={{
-              display: 'inline-block',
-              background: '#eee',
-              marginRight: '.5rem',
-              padding: '.3rem'
-            }}
-            to={ki === 'top' ? '/' : `/${ki}`}
-          >
+        <Link to="/" style={NavStyle}>
+          Top
+        </Link>
+        {['new', 'best', 'ask', 'show', 'job'].map((ki: string) => (
+          <Link key={ki} style={NavStyle} to={ki}>
             {ki}
           </Link>
         ))}
@@ -26,6 +26,7 @@ export default withRouter(({}) => (
     </header>
     <main>
       <Switch>
+        <Route exact path="/" render={() => <HnStory kind="top" />} />
         <Route
           exact
           path={'/:kind'}

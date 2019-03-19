@@ -13,7 +13,7 @@ function pageMaxNumber(items: any[], num: number): number {
 function pageItem<T>(items: T[], page: number): T[] {
   return items.slice(page * 10, page * 10 + 10)
 }
-export const HnStory: FC<Props> = ({ kind = 'top' }) => {
+export const HnStory: FC<Props> = ({ kind }) => {
   const { stories, getStory } = connectStories()
   const [page, setPage] = useState<number>(0)
   const changePage = useCallback(
