@@ -21,7 +21,7 @@ export const HnItems: FC<Props> = ({ id }) => {
   if (!item) return <p>...loading</p>
   return (
     <List>
-      <a href={item.url} target="_blank">
+      <a href={item.url} rel="noreferrer" target="_blank">
         {item.title}
         <span>{item.type}</span>
         <span>{item.id}</span>

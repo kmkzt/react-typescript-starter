@@ -40,10 +40,10 @@ module.exports = smart(common, {
           }
         },
         {
-          urlPattern: /\.(png|svg|woff|ttf|eot)/,
+          urlPattern: /\.(png|svg|woff|ttf|eot|json)/,
           handler: 'cacheFirst',
           options: {
-            cacheName: 'image',
+            cacheName: 'assets',
             expiration: {
               maxEntries: 100,
               maxAgeSeconds: 60 * 60 * 24 * 7
