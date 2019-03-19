@@ -17,7 +17,7 @@ export default withRouter(({}) => (
               marginRight: '.5rem',
               padding: '.3rem'
             }}
-            to={`/${ki}`}
+            to={ki === 'top' ? '/' : `/${ki}`}
           >
             {ki}
           </Link>
