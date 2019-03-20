@@ -1,14 +1,15 @@
 # React-typescript-starter
 
 Simple React boilerplate.
+[Demo](https://hn-react-hooks.netlify.com)
 
 ## feature
 
-- [-] jest
-- [-] offline
-- [-] typescript
-- [-] eslint
-- [-] SSR
+- [x] jest
+- [x] offline
+- [x] typescript
+- [x] eslint
+- [x] SSR
 
 ## get started
 
