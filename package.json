@@ -9,6 +9,7 @@
     "build": "rimraf ./build/* && NODE_ENV=production webpack -p --config webpack.prod.config.js",
     "build:dev": "NODE_ENV=production webpack-dev-server --config webpack.prod.config.js",
     "build:check": "NODE_ENV=production webpack -p --config webpack.check.config.js",
+    "ssr:build": "yarn build --ssr && node build/server.bundle.js",
     "test": "jest",
     "lint": "tslint --fix .src/**/*.{ts,tsx}",
     "lint:config": "tslint-config-prettier-check ./tslint.json",

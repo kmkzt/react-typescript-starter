@@ -18,6 +18,8 @@ const entry = ssr =>
         vendor,
         client: resolve(__dirname, 'src/client.tsx')
       }
+
+const output = ssr => (ssr ? '[name].js' : 'js/[name].js')
 const target = ssr => (ssr ? 'node' : 'web')
 const plugin = ssr =>
   ssr
@@ -75,8 +77,8 @@ const baseConfig = ssr => ({
   mode: devMode ? 'development' : 'production',
   entry: entry(ssr),
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: output(ssr),
+    chunkFilename: output(ssr),
     path: resolve(__dirname, 'build')
   },
   target: target(ssr),
