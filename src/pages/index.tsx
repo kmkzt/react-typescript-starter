@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { HnStory } from '@/components/orgenisms/HnStory'
 import { withRouter, Switch, Route, Link } from 'react-router-dom'
-import { Reset } from '@/components/utils/reset'
+import { Reset } from '@/components/utils/Reset'
 
 const NavStyle = {
   display: 'inline-block',
