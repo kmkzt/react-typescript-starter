@@ -7,7 +7,7 @@ const ssrMode = process.argv && process.argv.includes('--ssr')
 
 const excludeVendorModule = []
 
-const productionConfig = {
+const clientProductionConfig = smart(baseConfig(), {
   devtool: false,
   plugins: [
     new GenerateSW({
@@ -134,9 +134,8 @@ const productionConfig = {
       }
     }
   }
-}
+})
 
-const clientProductionConfig = smart(baseConfig(), productionConfig)
 module.exports = ssrMode
   ? [baseConfig(true), clientProductionConfig]
   : clientProductionConfig
