@@ -9,11 +9,11 @@
   },
   "author": "",
   "dependencies": {
-    "express": "^4.16.4",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "express": "4.16.4",
+    "react": "16.8.4",
+    "react-dom": "16.8.4"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "1.18.10"
   }
 }
