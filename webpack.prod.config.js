@@ -2,11 +2,12 @@ const { resolve } = require('path')
 const { smart } = require('webpack-merge')
 const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin') // https://github.com/terser-js/terser#minify-options
-const common = require('./webpack.config')
+const baseConfig = require('./webpack.config')
+const ssrMode = process.argv && process.argv.includes('--ssr')
 
 const excludeVendorModule = []
 
-module.exports = smart(common, {
+const productionConfig = {
   devtool: false,
   plugins: [
     new GenerateSW({
@@ -133,4 +134,9 @@ module.exports = smart(common, {
       }
     }
   }
-})
+}
+
+const clientProductionConfig = smart(baseConfig(), productionConfig)
+module.exports = ssrMode
+  ? [baseConfig(true), clientProductionConfig]
+  : clientProductionConfig

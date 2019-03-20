@@ -15,7 +15,10 @@
     "lint:fix": "prettier --write ./src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "es6-promise": "4.2.6",
     "express": "4.16.4",
+    "history": "^4.9.0",
+    "isomorphic-fetch": "^2.2.1",
     "polished": "3.0.3",
     "react": "16.8.4",
     "react-dom": "16.8.4",
@@ -89,7 +92,6 @@
     "webpack-manifest-plugin": "2.0.4",
     "webpack-merge": "4.2.1",
     "webpack-node-externals": "1.7.2",
-    "whatwg-fetch": "3.0.0",
     "workbox-webpack-plugin": "4.1.1"
   }
 }

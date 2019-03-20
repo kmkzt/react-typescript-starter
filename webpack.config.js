@@ -7,11 +7,18 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const dependencies = require('./package.json').dependencies
 const nodeExternals = require('webpack-node-externals')
 const devMode = process.env.NODE_ENV === 'development'
-const ssrMode = process.argv && process.argv.includes('--ssr')
 const vendor = Object.keys(dependencies).filter(pa => /react|styled/.test(pa))
 
 const entry = ssr =>
-  resolve(__dirname, 'src', ssr ? 'server.tsx' : 'client.tsx')
+  ssr
+    ? {
+        server: resolve(__dirname, 'src/server.tsx')
+      }
+    : {
+        vendor,
+        client: resolve(__dirname, 'src/client.tsx')
+      }
+const target = ssr => (ssr ? 'node' : 'web')
 const plugin = ssr =>
   ssr
     ? []
@@ -66,12 +73,13 @@ const externals = ssr => (ssr ? [nodeExternals()] : [])
 
 const baseConfig = ssr => ({
   mode: devMode ? 'development' : 'production',
-  entry: [...vendor, entry(ssr)],
+  entry: entry(ssr),
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     path: resolve(__dirname, 'build')
   },
+  target: target(ssr),
   module: {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' },
@@ -138,4 +146,4 @@ const baseConfig = ssr => ({
   ]
 })
 
-module.exports = baseConfig(ssrMode)
+module.exports = baseConfig

@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 
 export async function request<T extends object>(
   url: string,
