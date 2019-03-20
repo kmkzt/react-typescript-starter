@@ -6,7 +6,7 @@ export default async () => {
     const getWorkbox = (): typeof Workbox | null =>
       (self as any).workbox || null
     const register: ServiceWorkerRegistration = await navigator.serviceWorker.register(
-      'sw.js'
+      './sw.js'
     )
     register.pushManager.subscribe({ userVisibleOnly: true })
     const workbox = getWorkbox()
