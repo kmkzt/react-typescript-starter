@@ -1,23 +1,38 @@
 # React-typescript-starter
 
-Simple React boilerplate
+Simple React boilerplate.
+
+## feature
+
+- [-] jest
+- [-] offline
+- [-] typescript
+- [-] eslint
+- [-] SSR
 
 ## get started
 
 ```
+git clone https://github.com/kmkzt/react-typescript-starter myproject
+cd myproject
 yarn
 yarn dev
 ```
 
-## feature
-- [x] jest
-- [x] offline
-- [x] typescript
-- [x] eslint
-- [ ] SSR
+## spa build
+
+```
+yarn build
+```
+
+## ssr development
+
+```
+yarn ssr:dev
+```
 
 ## library
+
 - react(v16.8.4)
-- styled-components
-- react-router-dom
-- workbox
+- react-router-dom(v5.0.0)
+- workbox-sw(v4.1.1)
