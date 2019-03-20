@@ -19,17 +19,33 @@ yarn
 yarn dev
 ```
 
-## spa build
+## Development mode
+
+### SPA
+
+```
+yarn dev
+```
+
+### SPA ServiceWorker
+
+```
+yarn sw:dev
+```
+
+### SSR
+
+```
+yarn ssr:dev
+```
+
+## Production Build
 
 ```
 yarn build
 ```
 
-## ssr development
-
-```
-yarn ssr:dev
-```
+[wip] SSR Production build
 
 ## library
 

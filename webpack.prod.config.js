@@ -11,7 +11,8 @@ const clientProductionConfig = smart(baseConfig(), {
   devtool: false,
   plugins: [
     new GenerateSW({
-      swDest: 'sw.js',
+      swDest: 'js/sw.js',
+      importsDirectory: 'js/',
       globDirectory: resolve(__dirname, 'build'),
       globPatterns: ['**/*.{html,js,css}', '**/*.{jpg,jpeg,png,gif,webp,svg}'],
       globIgnores: ['**/node_modules/**/*'],
