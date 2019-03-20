@@ -1,19 +1,19 @@
-'use strict'
+import React from 'react'
+import express from 'express'
+import { renderToString } from 'react-dom/server'
+import { App } from '@/app'
 
-const express = require('express')
 const server = express()
-const reactDomServer = require('react-dom/server')
-const app = require('./app.js')
 
-const pageRender = rootComponent =>
+const pageRender = (app: string) =>
   `
   <html>
-    <div id="app">${rootComponent}</div>
+    <div id="app">${app}</div>
   </html>
   `
 
 server.get('*', (req, res) => {
-  const reactEle = reactDomServer.renderToString(app())
+  const reactEle: string = renderToString(<App />)
   res.send(pageRender(reactEle))
 })
 

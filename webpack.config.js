@@ -5,14 +5,68 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const dependencies = require('./package.json').dependencies
+const nodeExternals = require('webpack-node-externals')
 const devMode = process.env.NODE_ENV === 'development'
+const ssrMode = process.argv && process.argv.includes('--ssr')
+const vendor = Object.keys(dependencies).filter(pa => /react|styled/.test(pa))
 
-module.exports = {
+const entry = ssr =>
+  resolve(__dirname, 'src', ssr ? 'server.tsx' : 'client.tsx')
+const plugin = ssr =>
+  ssr
+    ? []
+    : [
+        new CleanWebpackPlugin(),
+        new FaviconsWebpackPlugin({
+          logo: './logo.svg',
+          prefix: 'icons/',
+          //  Emit all stats of the generated icons
+          emitStats: false,
+          // The name of the json containing all favicon information
+          statsFilename: 'iconstats.json',
+          // Generate a cache file with control hashes and
+          // don't rebuild the favicons until those hashes change
+          persistentCache: true,
+          // Inject the html into the html-webpack-plugin
+          inject: true,
+          // favicon background color (see https://github.com/haydenbleasel/favicons#usage)
+          background: '#fff',
+          // favicon app title (see https://github.com/haydenbleasel/favicons#usage)
+          title: 'React hooks hackernews',
+          // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            coast: false,
+            favicons: true,
+            firefox: true,
+            opengraph: false,
+            twitter: false,
+            yandex: false,
+            windows: false
+          }
+        }),
+        new HtmlWebpackPlugin({
+          meta: {
+            viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+            'theme-color': '#24d'
+          },
+          base: {
+            href: '/'
+          },
+          title: 'react hooks hackernews',
+          template: 'template.html',
+          hash: true,
+          minify: true,
+          cache: !devMode
+        })
+      ]
+const externals = ssr => (ssr ? [nodeExternals()] : [])
+
+const baseConfig = ssr => ({
   mode: devMode ? 'development' : 'production',
-  entry: [
-    ...Object.keys(dependencies).filter(pa => /react|styled/.test(pa)),
-    './src/index.tsx'
-  ],
+  entry: [...vendor, entry(ssr)],
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
@@ -74,55 +128,14 @@ module.exports = {
       })
     ]
   },
+  externals: externals(ssr),
   plugins: [
-    new CleanWebpackPlugin(),
     new Dotenv({
       path: devMode ? `development.env` : `production.env`,
       safe: false
     }),
-    new FaviconsWebpackPlugin({
-      logo: './logo.svg',
-      prefix: 'icons-[hash]/',
-      // Emit all stats of the generated icons
-      emitStats: false,
-      // The name of the json containing all favicon information
-      statsFilename: 'iconstats-[hash].json',
-      // Generate a cache file with control hashes and
-      // don't rebuild the favicons until those hashes change
-      persistentCache: true,
-      // Inject the html into the html-webpack-plugin
-      inject: true,
-      // favicon background color (see https://github.com/haydenbleasel/favicons#usage)
-      background: '#fff',
-      // favicon app title (see https://github.com/haydenbleasel/favicons#usage)
-      title: 'React hooks hackernews',
-      // which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: true,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false
-      }
-    }),
-    new HtmlWebpackPlugin({
-      meta: {
-        viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-        'theme-color': '#24d'
-      },
-      base: {
-        href: '/'
-      },
-      title: 'react hooks hackernews',
-      template: 'template.html',
-      hash: true,
-      minify: true,
-      cache: !devMode
-    })
+    ...plugin(ssr)
   ]
-}
+})
+
+module.exports = baseConfig(ssrMode)
