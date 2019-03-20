@@ -1,12 +1,18 @@
 import 'workbox-sw'
 import Workbox from 'workbox-sw'
 
-export default async () => {
+export default () => {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', loadSW)
+  }
+}
+
+const loadSW = async () => {
   try {
     const getWorkbox = (): typeof Workbox | null =>
       (self as any).workbox || null
     const register: ServiceWorkerRegistration = await navigator.serviceWorker.register(
-      './sw.js'
+      'js/sw.js'
     )
     register.pushManager.subscribe({ userVisibleOnly: true })
     const workbox = getWorkbox()
