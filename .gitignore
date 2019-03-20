@@ -8,9 +8,8 @@
 
 # production,distfile
 /dist
-build/**/*.html
-build/**/*.js
-build/**/*.css
+build/\!.gitkeep
+build/**/*
 
 # misc
 .DS_Store
