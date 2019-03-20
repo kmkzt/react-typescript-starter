@@ -1,18 +1,25 @@
 'use strict'
 
 const express = require('express')
-const app = express()
-const { renderToString } = require('react-dom/server')
-const client = require('./client.js')
+const server = express()
+const reactDomServer = require('react-dom/server')
+const app = require('./app.js')
 
-app.get('*', (req, res) => {
-  const reactEle = renderToString(client)
-  res.send(reactEle)
+const pageRender = rootComponent =>
+  `
+  <html>
+    <div id="app">${rootComponent}</div>
+  </html>
+  `
+
+server.get('*', (req, res) => {
+  const reactEle = reactDomServer.renderToString(app())
+  res.send(pageRender(reactEle))
 })
 
 if (process.env.NODE_ENV === 'development') {
-  app.listen(3000)
-  console.log('open localhost:3000')
+  server.listen(3000)
+  console.log('open http://localhost:3000')
 } else {
-  module.exports = app
+  module.exports = server
 }
