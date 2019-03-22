@@ -30,6 +30,11 @@ const Page = () => (
 
 server.use('/icons', express.static('./build/icons'))
 server.use('/js', express.static('./build/js'))
+server.use('/sw.js*', express.static('./build/sw.js'))
+server.use(
+  '/precache-manifest.js',
+  express.static('./build/precache-manifest.js')
+)
 server.get('*', (req, res) => {
   const reactEle: string = renderToString(React.createElement(Page))
   res.send(pageRender(reactEle))

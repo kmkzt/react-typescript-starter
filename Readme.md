@@ -8,7 +8,7 @@ Simple React boilerplate.
 - [x] jest
 - [x] typescript
 - [x] eslint
-- [ ] offline
+- [x] offline
 - [x] SSR
 
 ## get started

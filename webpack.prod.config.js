@@ -11,8 +11,8 @@ const clientProductionConfig = smart(baseConfig(), {
   devtool: false,
   plugins: [
     new GenerateSW({
-      swDest: 'js/sw.js',
-      importsDirectory: 'js/',
+      swDest: 'sw.js',
+      importsDirectory: 'js',
       // managed outside of webpack
       // globDirectory: 'https://aaaaa.com/images/',
       // globPatterns: ['https://aaaaa.com/page/*.{html,js,css}', 'https://aaaaa.com/images/*.{jpg,jpeg,png,gif,webp,svg}'],

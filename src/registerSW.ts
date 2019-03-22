@@ -12,7 +12,7 @@ const loadSW = async () => {
     const getWorkbox = (): typeof Workbox | null =>
       (self as any).workbox || null
     const register: ServiceWorkerRegistration = await navigator.serviceWorker.register(
-      'js/sw.js'
+      'sw.js'
     )
     register.pushManager.subscribe({ userVisibleOnly: true })
     const workbox = getWorkbox()
