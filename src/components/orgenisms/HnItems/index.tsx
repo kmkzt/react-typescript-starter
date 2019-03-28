@@ -9,18 +9,19 @@ interface Props {
 export const HnItems: FC<Props> = ({ id }) => {
   const { items, getItem } = useHNItem()
   const [item, setItem] = useState<Item | null>(null)
-  const loadItem = useCallback(() => {
+  const [loading, setLoading] = useState<boolean>(true)
+  useEffect(() => {
+    if (loading) {
+      getItem(id)
+      setLoading(false)
+    }
+  })
+  useEffect(() => {
     if (!items) return
     const findItem: Item | undefined = items.find((itm: Item) => itm.id === id)
     if (!findItem) return
     setItem(findItem)
-  }, [items, id])
-  useEffect(() => {
-    getItem(id)
-  }, [getItem, id])
-  useEffect(() => {
-    loadItem()
-  }, [loadItem])
+  }, [items, setItem, id])
   if (!item) return <p>...loading</p>
   return (
     <List>
