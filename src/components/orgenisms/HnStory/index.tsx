@@ -16,17 +16,14 @@ function pageItem<T>(items: T[], page: number): T[] {
 export const HnStory: FC<Props> = ({ kind }) => {
   const { stories, getStory } = useHNStories()
   const [page, setPage] = useState<number>(0)
-  const changePage = useCallback(
-    (p: number) => (e: React.MouseEvent<HTMLAnchorElement>) => {
-      setPage(p)
-    },
-    []
-  )
+  const changePage = (p: number) => (e: React.MouseEvent<HTMLAnchorElement>) =>
+    setPage(p)
   useEffect(() => {
     getStory(kind)
+  }, [kind, getStory])
+  useEffect(() => {
     setPage(0)
-  }, [getStory, kind])
-
+  }, [kind])
   if (!stories || !stories.hasOwnProperty(kind)) return <p>...loading</p>
 
   return (

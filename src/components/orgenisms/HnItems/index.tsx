@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useCallback } from 'react'
 import { Item } from '@/models/hn'
 import { useHNItem } from '@/store/hn/item'
 import styled from 'styled-components'
@@ -9,15 +9,18 @@ interface Props {
 export const HnItems: FC<Props> = ({ id }) => {
   const { items, getItem } = useHNItem()
   const [item, setItem] = useState<Item | null>(null)
-  useEffect(() => {
-    getItem(id)
-  }, [getItem, id])
-  useEffect(() => {
+  const loadItem = useCallback(() => {
     if (!items) return
     const findItem: Item | undefined = items.find((itm: Item) => itm.id === id)
     if (!findItem) return
     setItem(findItem)
-  }, [id, items])
+  }, [items, id])
+  useEffect(() => {
+    getItem(id)
+  }, [getItem, id])
+  useEffect(() => {
+    loadItem()
+  }, [loadItem])
   if (!item) return <p>...loading</p>
   return (
     <List>
