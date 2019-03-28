@@ -47,6 +47,6 @@ yarn ssr:build
 
 ## library
 
-- react(v16.8.4)
+- react(v16.8.5)
 - react-router-dom(v5.0.0)
 - workbox-sw(v4.1.1)

@@ -15,7 +15,7 @@ export const HnItems: FC<Props> = ({ id }) => {
       getItem(id)
       setLoading(false)
     }
-  })
+  }, [getItem, id, loading])
   useEffect(() => {
     if (!items) return
     const findItem: Item | undefined = items.find((itm: Item) => itm.id === id)

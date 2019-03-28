@@ -24,7 +24,7 @@ export const HnStory: FC<Props> = ({ kind }) => {
       getStory(kind)
       setLoading(false)
     }
-  })
+  }, [loading, getStory, kind])
   useEffect(() => {
     setPage(0)
     setLoading(true)
