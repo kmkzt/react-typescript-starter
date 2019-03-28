@@ -8,7 +8,7 @@ Simple React boilerplate.
 - [x] jest
 - [x] typescript
 - [x] eslint
-- [x] offline
+- [x] ServiceWorker(cache, offline)
 - [x] SSR
 
 ## get started
@@ -24,29 +24,26 @@ yarn dev
 
 ### SPA
 
-```
+```shell
+# development
 yarn dev
-```
 
-### SPA ServiceWorker
+# Service worker development
+yarn dev:sw
 
-```
-yarn sw:dev
+# production
+yarn build
 ```
 
 ### SSR
 
-```
+```shell
+# develpment
 yarn ssr:dev
-```
 
-## Production Build
-
+# [wip] SSR Production build
+yarn ssr:build
 ```
-yarn build
-```
-
-[wip] SSR Production build
 
 ## library
 
