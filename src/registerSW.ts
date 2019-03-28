@@ -17,7 +17,7 @@ const loadSW = async () => {
     register.pushManager.subscribe({ userVisibleOnly: true })
     const workbox = getWorkbox()
     if (!workbox) {
-      console.log(`Boo! Workbox didn't load 😬`)
+      console.log(`Boo! Workbox didn't load! 😬`)
       return
     }
     console.log(`Yay! Workbox is loaded 🎉`)
