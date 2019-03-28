@@ -81,6 +81,19 @@ const baseConfig = ssr => ({
   target: target(ssr),
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.(j|t)sx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              failOnWarning: true
+            }
+          }
+        ]
+      },
       { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' },
       {
         test: /\.tsx?$/,

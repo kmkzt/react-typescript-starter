@@ -63,7 +63,7 @@ export interface Store {
   clearUpdates: () => void
 }
 
-export const connectUpdates = (): Store => {
+export const useHNUpdates = (): Store => {
   const { state, dispatch } = React.useContext(Context)
   const get: Store['getUpdates'] = async () => {
     try {

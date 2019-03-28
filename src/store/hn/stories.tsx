@@ -66,7 +66,7 @@ export interface Store {
   clearStory: () => void
 }
 
-export const connectStories = (): Store => {
+export const useHNStories = (): Store => {
   const { state, dispatch } = React.useContext(Context)
   const getStory: Store['getStory'] = async kind => {
     try {

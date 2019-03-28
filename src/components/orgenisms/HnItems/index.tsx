@@ -1,27 +1,27 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Item } from '@/models/hn'
-import { connectItem } from '@/store/hn/item'
+import { useHNItem } from '@/store/hn/item'
 import styled from 'styled-components'
 
 interface Props {
   id: number
 }
 export const HnItems: FC<Props> = ({ id }) => {
-  const { items, getItem } = connectItem()
+  const { items, getItem } = useHNItem()
   const [item, setItem] = useState<Item | null>(null)
   useEffect(() => {
     getItem(id)
-  }, [])
+  }, [getItem, id])
   useEffect(() => {
     if (!items) return
     const findItem: Item | undefined = items.find((itm: Item) => itm.id === id)
     if (!findItem) return
     setItem(findItem)
-  }, [items])
+  }, [id, items])
   if (!item) return <p>...loading</p>
   return (
     <List>
-      <a href={item.url} rel="noreferrer" target="_blank">
+      <a href={item.url} rel="noopener noreferrer" target="_blank">
         {item.title}
         <span>{item.type}</span>
         <span>{item.id}</span>

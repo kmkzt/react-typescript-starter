@@ -64,7 +64,7 @@ export interface Store {
   clearItem: () => void
 }
 
-export const connectItem = (): Store => {
+export const useHNItem = (): Store => {
   const { state, dispatch } = React.useContext(Context)
   const getItem: Store['getItem'] = async id => {
     try {

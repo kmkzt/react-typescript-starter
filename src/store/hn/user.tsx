@@ -64,7 +64,7 @@ export interface Store {
   clearUser: () => void
 }
 
-export const connectUser = (): Store => {
+export const useHNUser = (): Store => {
   const { state, dispatch } = React.useContext(Context)
   const getUser: Store['getUser'] = async id => {
     try {

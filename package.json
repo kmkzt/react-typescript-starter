@@ -12,12 +12,12 @@
     "ssr:build": "yarn build --ssr",
     "ssr:dev": "yarn ssr:build && node build/server.js",
     "test": "jest",
-    "lint": "tslint --fix .src/**/*.{ts,tsx}",
-    "lint:config": "tslint-config-prettier-check ./tslint.json",
-    "lint:fix": "prettier --write ./src/**/*.{ts,tsx}"
+    "lint": "eslint -c .eslintrc.js --fix \"./src/**/**.{ts,tsx}\"",
+    "lint:fix": "prettier --write \"./src/**/**.{ts,tsx}\""
   },
   "dependencies": {
     "es6-promise": "4.2.6",
+    "eslint-loader": "2.1.2",
     "express": "4.16.4",
     "history": "4.9.0",
     "isomorphic-fetch": "2.2.1",

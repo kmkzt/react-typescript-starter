@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState, useCallback } from 'react'
-import { connectStories } from '@/store/hn/stories'
+import { useHNStories } from '@/store/hn/stories'
 import { StoryKind } from '@/models/hn'
 import { HnItems } from '@/components/orgenisms/HnItems'
 
@@ -14,18 +14,18 @@ function pageItem<T>(items: T[], page: number): T[] {
   return items.slice(page * 10, page * 10 + 10)
 }
 export const HnStory: FC<Props> = ({ kind }) => {
-  const { stories, getStory } = connectStories()
+  const { stories, getStory } = useHNStories()
   const [page, setPage] = useState<number>(0)
   const changePage = useCallback(
     (p: number) => (e: React.MouseEvent<HTMLAnchorElement>) => {
       setPage(p)
     },
-    [page]
+    []
   )
   useEffect(() => {
     getStory(kind)
     setPage(0)
-  }, [kind])
+  }, [getStory, kind])
 
   if (!stories || !stories.hasOwnProperty(kind)) return <p>...loading</p>
 
