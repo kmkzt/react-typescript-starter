@@ -8,20 +8,28 @@ export default () => {
 }
 
 const loadSW = async () => {
-  try {
-    const getWorkbox = (): typeof Workbox | null =>
-      (self as any).workbox || null
-    const register: ServiceWorkerRegistration = await navigator.serviceWorker.register(
-      'sw.js'
+  const successAction = (register: any) => {
+    // Registration was successful
+    console.log(
+      'ServiceWorker registration successful with scope: ',
+      register.scope
     )
+    checkWorkbox()
     register.pushManager.subscribe({ userVisibleOnly: true })
-    const workbox = getWorkbox()
-    if (!workbox) {
-      console.log(`Boo! Workbox didn't load! 😬`)
-      return
-    }
-    console.log(`Yay! Workbox is loaded 🎉`)
-  } catch (err) {
-    console.log('SW registration failed: ', err)
   }
+  const errorAction = (err: any) => {
+    // registration failed :(
+    console.log('ServiceWorker registration failed: ', err)
+  }
+  navigator.serviceWorker.register('/sw.js').then(successAction, errorAction)
+}
+
+const checkWorkbox = () => {
+  const getWorkbox = (): typeof Workbox | null => (self as any).workbox || null
+  const workbox = getWorkbox()
+  if (!workbox) {
+    console.log(`Boo! Workbox didn't load! 😬`)
+    return
+  }
+  console.log(`Yay! Workbox is loaded 🎉`)
 }

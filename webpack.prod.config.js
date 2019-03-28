@@ -22,7 +22,7 @@ const clientProductionConfig = smart(baseConfig(), {
       runtimeCaching: [
         {
           urlPattern: /\.html/,
-          handler: 'networkFirst',
+          handler: 'NetworkFirst',
           options: {
             cacheName: 'html',
             expiration: {
@@ -33,7 +33,7 @@ const clientProductionConfig = smart(baseConfig(), {
         },
         {
           urlPattern: /\.js/,
-          handler: 'networkFirst',
+          handler: 'NetworkFirst',
           options: {
             cacheName: 'js',
             expiration: {
@@ -44,7 +44,7 @@ const clientProductionConfig = smart(baseConfig(), {
         },
         {
           urlPattern: /\.(png|svg|woff|ttf|eot|json)/,
-          handler: 'cacheFirst',
+          handler: 'CacheFirst',
           options: {
             cacheName: 'assets',
             expiration: {
@@ -54,8 +54,8 @@ const clientProductionConfig = smart(baseConfig(), {
           }
         },
         {
-          urlPattern: new RegExp('https://hacker-news.firebaseio.com/v0/'),
-          handler: 'cacheFirst',
+          urlPattern: new RegExp('https://hacker-news.firebaseio.com/v0/item/'),
+          handler: 'CacheFirst',
           options: {
             cacheName: 'hnApi',
             expiration: {
