@@ -54,7 +54,7 @@ const clientProductionConfig = smart(baseConfig(), {
           }
         },
         {
-          urlPattern: new RegExp('https://hacker-news.firebaseio.com/v0/item/'),
+          urlPattern: new RegExp('https://hacker-news.firebaseio.com/v0/'),
           handler: 'CacheFirst',
           options: {
             cacheName: 'hnApi',
