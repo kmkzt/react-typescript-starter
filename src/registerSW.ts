@@ -21,7 +21,7 @@ const loadSW = async () => {
     // registration failed :(
     console.log('ServiceWorker registration failed: ', err)
   }
-  navigator.serviceWorker.register('/sw.js').then(successAction, errorAction)
+  navigator.serviceWorker.register('sw.js').then(successAction, errorAction)
 }
 
 const checkWorkbox = () => {
