@@ -30,8 +30,8 @@
     "workbox-sw": "4.3.1"
   },
   "devDependencies": {
-    "@babel/polyfill": "7.4.0",
-    "@babel/preset-env": "7.4.2",
+    "@babel/polyfill": "7.4.4",
+    "@babel/preset-env": "7.4.4",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
     "@types/enzyme": "3.9.1",
