@@ -13,6 +13,10 @@
   "ignoreDeps": ["^@types/node"],
   "packageRules": [
     {
+      "depTypeList": ["devDependencies"],
+      "automerge": true
+    },
+    {
       "groupName": "React package",
       "packagePatterns": ["^react", "^@types/react"]
     },
