@@ -24,7 +24,7 @@
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-helmet": "6.0.0-beta",
-    "react-router-dom": "5.0.0",
+    "react-router-dom": "5.3.4",
     "styled-components": "4.3.2",
     "workbox-sw": "4.3.1"
   },
