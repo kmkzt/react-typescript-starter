@@ -29,10 +29,10 @@
     "workbox-sw": "4.3.1"
   },
   "devDependencies": {
-    "@babel/polyfill": "7.4.4",
-    "@babel/preset-env": "7.5.5",
-    "@babel/preset-react": "7.0.0",
-    "@babel/preset-typescript": "7.3.3",
+    "@babel/polyfill": "7.12.1",
+    "@babel/preset-env": "7.25.9",
+    "@babel/preset-react": "7.25.9",
+    "@babel/preset-typescript": "7.25.9",
     "@types/enzyme": "3.10.3",
     "@types/enzyme-adapter-react-16": "1.0.5",
     "@types/express": "4.17.0",
